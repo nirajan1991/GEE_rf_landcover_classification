@@ -30,10 +30,6 @@ var l57_bandnames = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2','pixel_qa']
 var l8_bands = ['B2','B3','B4', 'B5','B6','B7','pixel_qa'];
 var l8_bandnames = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2','pixel_qa'];
 
-// name of the legend
-var names = ['lc1', 'lc2', 'lc3', 'lc4', 'lc5', 'lc6', 'lc7', 'lc10' ,'lc8', 'lc9', 'lc11', 'lc12', 'lc13', 'lc14', 'lc15'];
-
-
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 
