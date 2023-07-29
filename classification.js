@@ -1,5 +1,3 @@
-//2020, 2016, 2010, 2004, 1998, 1992 
-
 //This script is used to perform classification for land cover mapping in the Koshi river are in Morang, Sunsari and saptari
 // This uses vegetation data for 3 years seasonal composite to train the model 
 // and then applies the model to the yaer with same landsat mission to respective years
@@ -12,7 +10,7 @@
 //I had been using NDWI used for vegetatation water monitoring
 
 //The major hurdle was separating the urban area from bareland especially the area around Koshi
-//The BUI used was not able to separate this and as per the paper mentioned below other variants too can't
+//The BUI used was not able to separate this and as per the paper mentioned below other variants too were tested
 //The paper published in 2018 doi:10.3390/rs11030345 had used NDTI and in thier example was able to separate using sentinel images
 //For that I will need SWIR2 band to calculate NDTI
 
@@ -411,20 +409,6 @@ function RGB_reference_summer(yr){
 
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
-
-//set the parameters to display the ndvi values in the map
-//got that from the link but used only the visParam 
-//https://gis.stackexchange.com/questions/335545/calculate-the-annual-mean-ndvi-for-a-region-using-the-maximum-value-composite
-
-// var visParams = {
-//     min: -1,
-//     max: 1,
-//     palette: 'FFFFFF, CE7E45, DF923D, F1B555, FCD163, 99B718, 74A901, 66A000, 529400,' +
-//       '3E8601, 207401, 056201, 004C00, 023B01, 012E01, 011D01, 011301'
-//     //palette : [ '#0b4a8b', '#ffc82d', '#00ff00', '#bf04c2', '#ff0000', '#f6e3ff', '#c2491f', '#fdff86', '#d63000']
-//   };
-//------------------------------------------------------------------------
-//---------------------------------------------------------------------------
 //Define the landcover visualization parameters for both landsat5 and landsat8 based results
 var lc_viz_lc5 = {
   min: 1,
@@ -616,8 +600,8 @@ print('sparse_trees_2021',training_data.size());
 //-------------------------------------------------------------------------
 //-------------------------------------------------------------------------
 // since there were clouds in one or more seasons that gave cloudy observations in results as well
-// to avoid this we are performing the classification with data from each season to fill the gaps
-//separate the seasons and create 
+// to avoid this we experimented with the classification with data from each season to fill the gaps
+//separate the seasons and create datasets for training and classifying
 var VIs = ['NDVI', 'NDWI', 'NIR', 'NDTI']
 
 function gen_bandname_season(season){
@@ -709,48 +693,6 @@ var classifier_autumn_lc8 = train_classifier_season(lc8_train_year, ntrees, seed
 var classifier_yearly = train_classifier(lc8_train_year, ntrees, seed_number, sampling_sites_2021)
 
 var yr = 2020
-var classes_winter_2021 = apply_classifier_season(yr, classifier_winter_lc8, ntrees, seed_number, 1)
-var classes_spring_2021 = apply_classifier_season(yr, classifier_spring_lc8, ntrees, seed_number, 2)
-var classes_summer_2021 = apply_classifier_season(yr, classifier_summer_lc8, ntrees, seed_number, 3)
-var classes_autumn_2021 = apply_classifier_season(yr, classifier_autumn_lc8, ntrees, seed_number, 4)
-var classes_yearly_2021 = apply_classifier(yr, classifier_yearly, ntrees, seed_number)
-
-var yr = 2019
-var classes_winter_2021 = apply_classifier_season(yr, classifier_winter_lc8, ntrees, seed_number, 1)
-var classes_spring_2021 = apply_classifier_season(yr, classifier_spring_lc8, ntrees, seed_number, 2)
-var classes_summer_2021 = apply_classifier_season(yr, classifier_summer_lc8, ntrees, seed_number, 3)
-var classes_autumn_2021 = apply_classifier_season(yr, classifier_autumn_lc8, ntrees, seed_number, 4)
-var classes_yearly_2021 = apply_classifier(yr, classifier_yearly, ntrees, seed_number)
-
-var yr = 2018
-var classes_winter_2021 = apply_classifier_season(yr, classifier_winter_lc8, ntrees, seed_number, 1)
-var classes_spring_2021 = apply_classifier_season(yr, classifier_spring_lc8, ntrees, seed_number, 2)
-var classes_summer_2021 = apply_classifier_season(yr, classifier_summer_lc8, ntrees, seed_number, 3)
-var classes_autumn_2021 = apply_classifier_season(yr, classifier_autumn_lc8, ntrees, seed_number, 4)
-var classes_yearly_2021 = apply_classifier(yr, classifier_yearly, ntrees, seed_number)
-
-var yr = 2017
-var classes_winter_2021 = apply_classifier_season(yr, classifier_winter_lc8, ntrees, seed_number, 1)
-var classes_spring_2021 = apply_classifier_season(yr, classifier_spring_lc8, ntrees, seed_number, 2)
-var classes_summer_2021 = apply_classifier_season(yr, classifier_summer_lc8, ntrees, seed_number, 3)
-var classes_autumn_2021 = apply_classifier_season(yr, classifier_autumn_lc8, ntrees, seed_number, 4)
-var classes_yearly_2021 = apply_classifier(yr, classifier_yearly, ntrees, seed_number)
-
-var yr = 2016
-var classes_winter_2021 = apply_classifier_season(yr, classifier_winter_lc8, ntrees, seed_number, 1)
-var classes_spring_2021 = apply_classifier_season(yr, classifier_spring_lc8, ntrees, seed_number, 2)
-var classes_summer_2021 = apply_classifier_season(yr, classifier_summer_lc8, ntrees, seed_number, 3)
-var classes_autumn_2021 = apply_classifier_season(yr, classifier_autumn_lc8, ntrees, seed_number, 4)
-var classes_yearly_2021 = apply_classifier(yr, classifier_yearly, ntrees, seed_number)
-
-var yr = 2015
-var classes_winter_2021 = apply_classifier_season(yr, classifier_winter_lc8, ntrees, seed_number, 1)
-var classes_spring_2021 = apply_classifier_season(yr, classifier_spring_lc8, ntrees, seed_number, 2)
-var classes_summer_2021 = apply_classifier_season(yr, classifier_summer_lc8, ntrees, seed_number, 3)
-var classes_autumn_2021 = apply_classifier_season(yr, classifier_autumn_lc8, ntrees, seed_number, 4)
-var classes_yearly_2021 = apply_classifier(yr, classifier_yearly, ntrees, seed_number)
-
-var yr = 2014
 var classes_winter_2021 = apply_classifier_season(yr, classifier_winter_lc8, ntrees, seed_number, 1)
 var classes_spring_2021 = apply_classifier_season(yr, classifier_spring_lc8, ntrees, seed_number, 2)
 var classes_summer_2021 = apply_classifier_season(yr, classifier_summer_lc8, ntrees, seed_number, 3)
