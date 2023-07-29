@@ -490,7 +490,7 @@ var sampling_sites_2021 =  water_2019
 var l578_yr_stacked_list = stack_vi_data(2021);
 var l578_yr_stacked = l578_yr_stacked_list[0]
 
-//check number of samples in each land cover type
+//check number of samples in each land cover type to ensure that sufficient number of samples are there for each one
 var training_data = l578_yr_stacked.sampleRegions({
   collection : urban_2019,
   properties : ['id'],
